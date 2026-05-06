@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Session
 from app.models.users import User
 from app.schemas.user import UserRegister
-from app.core.security import hash_password, verify_password, create_acces_token
+from app.core.security import hash_password, verify_password, create_access_token
 from fastapi import HTTPException, status
 
 def register_user(db:Session, data: UserRegister) -> User:
@@ -39,5 +39,5 @@ def login_user(db:Session, email: str, password:str) -> dict:
             detail="Usuario inactivo"
         )
     
-    token = create_acces_token(data={"sub":str(user.id), "role":user.role})
-    return {"acces_token":token, "token_type": "bearer", "user": user}
+    token = create_access_token(data={"sub":str(user.id), "role":user.role})
+    return {"access_token":token, "token_type": "bearer", "user": user}

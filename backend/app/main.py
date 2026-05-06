@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.routes import auth
 
 app = FastAPI(
-    tittle="Isabella Stylos API",
+    title="Isabella Stylos API",
     description="Sistema de gestión de citas para salon de belleza",
     version="1.0.0"
 ) 
