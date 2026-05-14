@@ -1,6 +1,8 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.routes import auth
+from app.routes import auth, services
+
+
 
 app = FastAPI(
     title="Isabella Stylos API",
@@ -15,7 +17,11 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+app.include_router(auth.router)
+app.include_router(services.router)
 app.include_router(auth.router, prefix="/auth", tags=["auth"])
+
+
 
 @app.get("/")
 def root():
