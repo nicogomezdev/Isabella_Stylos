@@ -5,7 +5,8 @@ from app.core.database import get_db
 from app.core.dependencies import get_current_user, require_admin
 from app.schemas.service import ServiceCreate, ServiceUpdate, ServiceResponse
 from app.services import service_service
-from app.models.users import User
+from app.models.users import User   
+from fastapi import APIRouter, Depends, HTTPException
 
 router = APIRouter(prefix="/services", tags=["Servicios"])
 
@@ -16,10 +17,15 @@ def get_services(db: Session = Depends(get_db)):
 
 @router.get("/{service_id}", response_model = ServiceResponse)
 def get_service(service_id : UUID, db: Session = Depends(get_db)):
-    return service_service.get_service_by_id(db, service_id)
+    service = service_service.get_service_by_id(db, service_id)
 
+    if not service or not service.is_active:
+        raise HTTPException(status_code=404, detail="Servicio no encontrado o inactivo")
+    return service
 
 @router.post("/", response_model = ServiceResponse, status_code=201)
+
+
 def create_service(
     data: ServiceCreate,
     db : Session = Depends(get_db),
@@ -43,5 +49,6 @@ def delete_service(
     db : Session = Depends(get_db),
     admin : User = Depends(require_admin)
 ):
+    
     return service_service.delete_service(db,service_id)
 

@@ -86,6 +86,18 @@ Si contesta http://localhost:3000/ ya se encuentra operativo el frontend, es la 
 
 <h3 align=center> tests </h3>
 
+<h5> Backend </h5>
+
+desde la carpeta backend ejecuta el comando 
+
+```bash
+pytest app/tests/test_auth.py -v
+
+```
+
+y verifica que todos pasen.
+
+
 <h3 align=center>Funcionalidades </h3>
 
 <h3 align=center> structura del proyecto </h3>

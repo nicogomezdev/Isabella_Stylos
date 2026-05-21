@@ -47,4 +47,5 @@ def delete_service(db : Session, service_id : UUID) -> dict:
     service = get_service_by_id(db, service_id)
     service.is_active = False
     db.commit()
+    db.refresh(service)
     return {"message": f"Servicio '{service.name}' desactivado correctamente"}

@@ -11,6 +11,6 @@ class Service(Base):
     name = Column(String, nullable=False)
     description = Column(Text, nullable=True)
     duration_minutes = Column(Integer, nullable= False)
-    price = Column(Numeric(10,2), nullable= False)
+    price = Column(Integer, nullable= False)
     is_active = Column(Boolean, default=True)
     created_at = Column(DateTime(timezone=True), default=lambda: datetime.now(timezone.utc)) 

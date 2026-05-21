@@ -7,7 +7,7 @@ class ServiceCreate(BaseModel):
     name : str
     description: str | None = None
     duration_minutes : int
-    price : Decimal
+    price : int
 
     @field_validator("duration_minutes")
     @classmethod
@@ -27,7 +27,7 @@ class ServiceUpdate(BaseModel):
     name : str | None = None
     description : str | None = None
     duration_minutes :int | None = None
-    price : Decimal | None = None
+    price : int | None = None
     is_active : bool | None = None
 
 class ServiceResponse(BaseModel):
@@ -35,7 +35,7 @@ class ServiceResponse(BaseModel):
     name : str
     description : str | None 
     duration_minutes : int
-    price : Decimal
+    price : int
     is_active : bool
     created_at : datetime
 
