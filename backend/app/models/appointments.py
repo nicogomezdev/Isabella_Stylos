@@ -10,7 +10,7 @@ class AppointmentStatus(str, enum.Enum):
     pending = "pending"
     confirmed = "confirmed"
     completed = "completed"
-    cancelled = "canceled"
+    cancelled = "cancelled"
 
 class Appointment(Base):
     __tablename__ = "appointments"

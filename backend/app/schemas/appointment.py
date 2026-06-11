@@ -7,14 +7,15 @@ from app.schemas.service import ServiceResponse
 
 class AppointmentCreate(BaseModel):
     service_id : UUID
-    appotinment_date : date
+    appointment_date : date
     start_time : time
     notes : str | None = None
 
-    @field_validator
-    def date_must_be_future(cls,v):
+    @field_validator("appointment_date")
+    @classmethod
+    def date_must_be_future(cls, v):
         if v < date.today():
-            raise ValueError("La fecha de la cita no puede ser hoy o antes que hoy")
+            raise ValueError("La fecha de la cita debe ser hoy o en el futuro")
         return v
     
 class AppointmentStatusUpdate(BaseModel):
@@ -36,9 +37,9 @@ class AppointmentResponse(BaseModel):
 
 class AvailableSlot(BaseModel):
     start_time : time
-    edn_time :time
+    end_time :time
 
-class AvailableSlotResponse(BaseModel):
+class AvailableSlotsResponse(BaseModel):
     date: date
     service_id : UUID
     available_slots : list[AvailableSlot]
